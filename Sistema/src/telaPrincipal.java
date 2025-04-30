@@ -248,12 +248,15 @@ public class telaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGravarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        int response = JOptionPane.showConfirmDialog(null, "[ALERTA] deseja remover?","Confirmação",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        int response = JOptionPane.showConfirmDialog(null, "Deseja remover?","Confirmação",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         
         if(response == JOptionPane.YES_OPTION){
             DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
-            int row = modelo.getRowCount()-1;
-            modelo.removeRow(row);
+            if(jTable1.getSelectedRow()>=0){
+                modelo.removeRow(jTable1.getSelectedRow());
+            }else{
+                JOptionPane.showMessageDialog(null, "Selecione uma linha para remover");
+            }
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
