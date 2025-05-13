@@ -1,5 +1,6 @@
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -52,8 +53,8 @@ public class FormularioPfPj extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextField9 = new javax.swing.JTextField();
         inputCep = new javax.swing.JTextField();
-        rbMasculino = new javax.swing.JRadioButton();
-        rbFeminino = new javax.swing.JRadioButton();
+        rbFisica = new javax.swing.JRadioButton();
+        rbJuridica = new javax.swing.JRadioButton();
         jLabel10 = new javax.swing.JLabel();
         inputRG = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -62,8 +63,8 @@ public class FormularioPfPj extends javax.swing.JFrame {
         inputCnpj = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         inputIE = new javax.swing.JTextField();
-        rbFisica = new javax.swing.JRadioButton();
-        rbJuridica = new javax.swing.JRadioButton();
+        rbMasculino = new javax.swing.JRadioButton();
+        rbFeminino = new javax.swing.JRadioButton();
         jLabel14 = new javax.swing.JLabel();
         inputEstadoCivil = new javax.swing.JTextField();
         btnGravar = new javax.swing.JButton();
@@ -112,17 +113,7 @@ public class FormularioPfPj extends javax.swing.JFrame {
 
         jTextField9.setText("jTextField9");
 
-        buttonGroup2.add(rbMasculino);
-        rbMasculino.setText("Masculino");
-
-        buttonGroup2.add(rbFeminino);
-        rbFeminino.setText("Feminino");
-
-        jLabel10.setText("RG");
-
-        jLabel11.setText("CPF");
-
-        buttonGroup3.add(rbFisica);
+        buttonGroup2.add(rbFisica);
         rbFisica.setText("Física");
         rbFisica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,12 +121,37 @@ public class FormularioPfPj extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup3.add(rbJuridica);
-        rbJuridica.setText("Jurídica");
+        buttonGroup2.add(rbJuridica);
+        rbJuridica.setText("Juridica");
+        rbJuridica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbJuridicaActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("RG");
+
+        jLabel11.setText("CPF");
+
+        buttonGroup3.add(rbMasculino);
+        rbMasculino.setText("Masculino");
+        rbMasculino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbMasculinoActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(rbFeminino);
+        rbFeminino.setText("Feminio");
 
         jLabel14.setText("Estado civil");
 
         btnGravar.setText("Gravar");
+        btnGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGravarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -214,9 +230,9 @@ public class FormularioPfPj extends javax.swing.JFrame {
                                     .addComponent(jLabel8)
                                     .addComponent(inputCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(rbMasculino)
+                                .addComponent(rbFisica)
                                 .addGap(18, 18, 18)
-                                .addComponent(rbFeminino)
+                                .addComponent(rbJuridica)
                                 .addGap(30, 30, 30)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -229,9 +245,9 @@ public class FormularioPfPj extends javax.swing.JFrame {
                                             .addGap(113, 113, 113))
                                         .addComponent(inputCnpj))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(rbFisica)
+                                        .addComponent(rbMasculino)
                                         .addGap(18, 18, 18)
-                                        .addComponent(rbJuridica)))))
+                                        .addComponent(rbFeminino)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -308,8 +324,8 @@ public class FormularioPfPj extends javax.swing.JFrame {
                     .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbMasculino)
-                    .addComponent(rbFeminino)
+                    .addComponent(rbFisica)
+                    .addComponent(rbJuridica)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -328,8 +344,8 @@ public class FormularioPfPj extends javax.swing.JFrame {
                     .addComponent(inputIE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbFisica)
-                    .addComponent(rbJuridica)
+                    .addComponent(rbMasculino)
+                    .addComponent(rbFeminino)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -370,9 +386,9 @@ public class FormularioPfPj extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inputComplementoActionPerformed
 
-    private void rbFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFisicaActionPerformed
+    private void rbMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMasculinoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rbFisicaActionPerformed
+    }//GEN-LAST:event_rbMasculinoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         int response = JOptionPane.showConfirmDialog(null, "Deseja cancelar?","Confirmação",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
@@ -390,10 +406,10 @@ public class FormularioPfPj extends javax.swing.JFrame {
             inputIE.setText("");
             inputNumero.setText("");
             inputTel.setText("");
-            rbMasculino.setSelected(false);
-            rbFeminino.setSelected(false);
             rbFisica.setSelected(false);
             rbJuridica.setSelected(false);
+            rbMasculino.setSelected(false);
+            rbFeminino.setSelected(false);
             cbEstado.setSelectedIndex(0);
             inputRG.setText("");
             inputCPF.setText("");
@@ -412,6 +428,41 @@ public class FormularioPfPj extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void rbFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFisicaActionPerformed
+        inputCnpj.setEnabled(false);
+        inputIE.setEnabled(false);
+        rbMasculino.setEnabled(true);
+        rbFeminino.setEnabled(true);
+        inputCPF.setEnabled(true);
+    }//GEN-LAST:event_rbFisicaActionPerformed
+
+    private void rbJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbJuridicaActionPerformed
+        inputCnpj.setEnabled(true);
+        inputIE.setEnabled(true);
+        rbMasculino.setEnabled(false);
+        rbFeminino.setEnabled(false);
+        inputCPF.setEnabled(false);
+    }//GEN-LAST:event_rbJuridicaActionPerformed
+
+    private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
+        int response = JOptionPane.showConfirmDialog(null, "Deseja gravar?","Confirmação",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        
+        if(response == JOptionPane.YES_OPTION){
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            
+            String[] linha = new String[7];
+            linha[0] = inputCodigo.getText();
+            linha[1] = inputNome.getText();
+            linha[2] = cbEstado.getSelectedItem().toString();
+            linha[3] = inputCidade.getText();
+            linha[4] = rbFisica.isSelected() ? "Física" : "Juridica";
+            linha[5] = rbFisica.isSelected() ? inputCPF.getText() : inputCnpj.getText();
+            linha[6] = rbFisica.isSelected() ? inputRG.getText() : inputIE.getText();
+            
+            model.addRow(linha);
+        }
+    }//GEN-LAST:event_btnGravarActionPerformed
 
     /**
      * @param args the command line arguments

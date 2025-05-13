@@ -106,9 +106,9 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="rbMasculino" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbFisica" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="rbFeminino" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbJuridica" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -123,9 +123,9 @@
                                           <Component id="inputCnpj" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="rbFisica" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rbMasculino" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="rbJuridica" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rbFeminino" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -227,8 +227,8 @@
                   </Group>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="rbMasculino" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="rbFeminino" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbFisica" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbJuridica" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -251,8 +251,8 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="rbFisica" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="rbJuridica" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbMasculino" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbFeminino" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -388,21 +388,27 @@
         </Component>
         <Component class="javax.swing.JTextField" name="inputCep">
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rbMasculino">
+        <Component class="javax.swing.JRadioButton" name="rbFisica">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup2"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Masculino"/>
+            <Property name="text" type="java.lang.String" value="F&#xed;sica"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbFisicaActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rbFeminino">
+        <Component class="javax.swing.JRadioButton" name="rbJuridica">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup2"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Feminino"/>
+            <Property name="text" type="java.lang.String" value="Juridica"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbJuridicaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
@@ -426,23 +432,23 @@
         </Component>
         <Component class="javax.swing.JTextField" name="inputIE">
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rbFisica">
+        <Component class="javax.swing.JRadioButton" name="rbMasculino">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup3"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="F&#xed;sica"/>
+            <Property name="text" type="java.lang.String" value="Masculino"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbFisicaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbMasculinoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rbJuridica">
+        <Component class="javax.swing.JRadioButton" name="rbFeminino">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup3"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Jur&#xed;dica"/>
+            <Property name="text" type="java.lang.String" value="Feminio"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel14">
@@ -456,6 +462,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Gravar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGravarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
