@@ -467,6 +467,26 @@ public class FormularioPfPj extends javax.swing.JFrame {
             linha[6] = rbFisica.isSelected() ? inputRG.getText() : inputIE.getText();
             
             model.addRow(linha);
+            
+            inputCodigo.setText("");
+            inputNome.setText("");
+            inputBairro.setText("");
+            inputCep.setText("");
+            inputCidade.setText("");
+            inputCnpj.setText("");
+            inputComplemento.setText("");
+            inputEndereco.setText("");
+            inputEstadoCivil.setText("");
+            inputIE.setText("");
+            inputNumero.setText("");
+            inputTel.setText("");
+            rbFisica.setSelected(false);
+            rbJuridica.setSelected(false);
+            rbMasculino.setSelected(false);
+            rbFeminino.setSelected(false);
+            cbEstado.setSelectedIndex(0);
+            inputRG.setText("");
+            inputCPF.setText("");
         }
     }//GEN-LAST:event_btnGravarActionPerformed
 
