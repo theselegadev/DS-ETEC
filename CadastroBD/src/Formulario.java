@@ -321,6 +321,13 @@ catch (SQLException ex)
         int response = JOptionPane.showConfirmDialog(null, "Deseja salvar?","Confirmação",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
          
          if(response == JOptionPane.YES_OPTION){
+            int quantidade = Integer.parseInt(edtQuantidade.getText());
+            double valor = Double.parseDouble(edtValor.getText());
+
+            double total = quantidade * valor;
+
+            edtTotal.setText(String.valueOf(total));
+            
             try
             {
                Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/estoque","root",""); 
@@ -345,15 +352,7 @@ catch (SQLException ex)
         
             this.Lista();
             
-            if(edtValor.getText() != "" && edtQuantidade.getText() != ""){
-                int quantidade = Integer.parseInt(edtQuantidade.getText());
-                double valor = Double.parseDouble(edtValor.getText());
-
-                double total = quantidade * valor;
-
-                edtTotal.setText(String.valueOf(total));
-                edtTotal.setEnabled(false);
-            }
+            
         }
      
  
