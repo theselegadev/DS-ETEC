@@ -22,22 +22,23 @@ public class Formulario extends javax.swing.JFrame {
     private void Limpa() {
                 
         edtCodigo.setText("");
-        edtNome.setText("");
-        edtTelefone.setText("");
-        edtEmail.setText("");
-      
+        edtDescricao.setText("");
+        edtQuantidade.setText("");
+        edtValor.setText("");
+        edtTotal.setText("");
     }
+    
     
     private void Lista() {
         
         
                 try
         {
-            Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/banco","root",""); 
+            Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/estoque","root",""); 
         
             String sql;
         
-            sql="select * from cadastro";
+            sql="select * from produtos";
         
             PreparedStatement banco = (PreparedStatement) con.prepareStatement(sql);
       
@@ -56,9 +57,10 @@ public class Formulario extends javax.swing.JFrame {
                 { 
                     //retorna os dados da tabela do BD, cada campo e um coluna.
                     resultado.getString("codigo"),
-                    resultado.getString("nome"),
-                    resultado.getString("telefone"),
-                    resultado.getString("email")
+                    resultado.getString("descricao"),
+                    resultado.getString("quantidade"),
+                    resultado.getString("valor"),
+                    resultado.getString("total")
                    }); 
             } 
             banco.close();
@@ -77,22 +79,27 @@ catch (SQLException ex)
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnListar = new javax.swing.JButton();
         lblCodigo = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
-        edtNome = new javax.swing.JTextField();
+        edtDescricao = new javax.swing.JTextField();
         lblTelefone = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
-        edtEmail = new javax.swing.JTextField();
+        edtValor = new javax.swing.JTextField();
         btnLimpar = new javax.swing.JButton();
         btlSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         edtCodigo = new javax.swing.JTextField();
-        edtTelefone = new javax.swing.JTextField();
+        edtQuantidade = new javax.swing.JTextField();
+        edtTotal = new javax.swing.JTextField();
+        lblEmail1 = new javax.swing.JLabel();
+
+        jLabel1.setText("Total");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,7 +111,7 @@ catch (SQLException ex)
 
             },
             new String [] {
-                "Codigo", "Nome", "Teefone", "E-mail"
+                "Codigo", "Descrição", "Quantidade", "Valor", "Total"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -121,22 +128,22 @@ catch (SQLException ex)
         lblCodigo.setText("Codigo");
 
         lblNome.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblNome.setText("Nome");
+        lblNome.setText("Descrição");
 
         lblTelefone.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblTelefone.setText("Telefone");
+        lblTelefone.setText("Quantidade");
 
         lblEmail.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblEmail.setText("E-mail");
+        lblEmail.setText("Valor");
 
-        edtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+        edtValor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                edtEmailFocusLost(evt);
+                edtValorFocusLost(evt);
             }
         });
-        edtEmail.addActionListener(new java.awt.event.ActionListener() {
+        edtValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edtEmailActionPerformed(evt);
+                edtValorActionPerformed(evt);
             }
         });
 
@@ -172,6 +179,21 @@ catch (SQLException ex)
             }
         });
 
+        edtQuantidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtQuantidadeActionPerformed(evt);
+            }
+        });
+
+        edtTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtTotalActionPerformed(evt);
+            }
+        });
+
+        lblEmail1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblEmail1.setText("Total");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -197,15 +219,19 @@ catch (SQLException ex)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(edtNome))
+                        .addComponent(edtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(lblTelefone)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(edtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblEmail)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblEmail1)
+                        .addGap(13, 13, 13)
+                        .addComponent(edtTotal))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnLimpar)
                         .addGap(45, 45, 45)
@@ -219,14 +245,16 @@ catch (SQLException ex)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodigo)
                     .addComponent(lblNome)
-                    .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(edtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefone)
                     .addComponent(lblEmail)
-                    .addComponent(edtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(edtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmail1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpar)
@@ -295,10 +323,10 @@ catch (SQLException ex)
          if(response == JOptionPane.YES_OPTION){
             try
             {
-               Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/banco","root",""); 
+               Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/estoque","root",""); 
                Statement stmt=(Statement)con.createStatement();
 
-              String insert="INSERT INTO cadastro VALUES('"+edtCodigo.getText()+"','"+edtNome.getText()+"','"+edtTelefone.getText()+"','"+edtEmail.getText()+"');";
+              String insert="INSERT INTO produtos VALUES('"+edtCodigo.getText()+"','"+edtDescricao.getText()+"','"+edtQuantidade.getText()+"','"+edtValor.getText()+"','"+edtTotal.getText()+"');";
               stmt.executeUpdate(insert);
 
 
@@ -316,6 +344,16 @@ catch (SQLException ex)
         //ActionListener listener = new actionperformclass();
         
             this.Lista();
+            
+            if(edtValor.getText() != "" && edtQuantidade.getText() != ""){
+                int quantidade = Integer.parseInt(edtQuantidade.getText());
+                double valor = Double.parseDouble(edtValor.getText());
+
+                double total = quantidade * valor;
+
+                edtTotal.setText(String.valueOf(total));
+                edtTotal.setEnabled(false);
+            }
         }
      
  
@@ -332,10 +370,10 @@ catch (SQLException ex)
                  
                 try
                 {
-                    Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/banco","root",""); 
+                    Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/estoque","root",""); 
                     Statement stmt=(Statement)con.createStatement();
 
-                    String delete="DELETE FROM cadastro WHERE codigo="+
+                    String delete="DELETE FROM produtos WHERE codigo="+
                     jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0)+";";  
                     stmt.executeUpdate(delete);
                 }
@@ -353,14 +391,25 @@ catch (SQLException ex)
    
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void edtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtEmailActionPerformed
+    private void edtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtValorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_edtEmailActionPerformed
+        
+    }//GEN-LAST:event_edtValorActionPerformed
 
-    private void edtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edtEmailFocusLost
+    private void edtValorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edtValorFocusLost
         // TODO add your handling code here:
-        edtEmail.setText(edtEmail.getText().toLowerCase());
-    }//GEN-LAST:event_edtEmailFocusLost
+        edtValor.setText(edtValor.getText().toLowerCase());
+    }//GEN-LAST:event_edtValorFocusLost
+
+    private void edtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtQuantidadeActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_edtQuantidadeActionPerformed
+
+    private void edtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtTotalActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_edtTotalActionPerformed
 
        
     /**
@@ -405,14 +454,17 @@ catch (SQLException ex)
     private javax.swing.JButton btnListar;
     private javax.swing.JButton btnSair;
     private javax.swing.JTextField edtCodigo;
-    private javax.swing.JTextField edtEmail;
-    private javax.swing.JTextField edtNome;
-    private javax.swing.JTextField edtTelefone;
+    private javax.swing.JTextField edtDescricao;
+    private javax.swing.JTextField edtQuantidade;
+    private javax.swing.JTextField edtTotal;
+    private javax.swing.JTextField edtValor;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblEmail1;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblTelefone;
     // End of variables declaration//GEN-END:variables
