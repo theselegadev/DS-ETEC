@@ -138,10 +138,25 @@ public class formulario extends javax.swing.JFrame {
         jLabel6.setText("Valor Geral");
 
         btnListar.setText("Listar");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -283,7 +298,7 @@ public class formulario extends javax.swing.JFrame {
 
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
         // TODO add your handling code here:
-        int res = JOptionPane.showConfirmDialog(null, "Deseja Cancelar?", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int res = JOptionPane.showConfirmDialog(null, "Deseja gravar?", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(res == 0){
             String resultado = this.CalcSubTotal(Integer.valueOf(inpQuantidade.getText()),Double.parseDouble(inpVlUnitario.getText()));
         
@@ -312,6 +327,46 @@ public class formulario extends javax.swing.JFrame {
             this.Lista();
         }  
     }//GEN-LAST:event_btnGravarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(null, "Deseja excluir?","Confirmação",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+         
+         if(response == JOptionPane.YES_OPTION){
+            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+            if (jTable1.getSelectedRow() >= 0){
+                 
+                try
+                {
+                    com.mysql.jdbc.Connection con=(com.mysql.jdbc.Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/banco","root",""); 
+                    Statement stmt=(Statement)con.createStatement();
+
+                    String delete="DELETE FROM produto WHERE numero="+
+                    jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0)+";";  
+                    stmt.executeUpdate(delete);
+                }
+                catch(Exception e)
+                {
+                    JOptionPane.showMessageDialog(null, e.getMessage() ,"Error", 1);
+                }        
+
+                this.Lista();     
+              
+            }else{
+                JOptionPane.showMessageDialog(null, "Favor selecionar uma linha");
+            }
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        // TODO add your handling code here:
+        this.Lista();
+    }//GEN-LAST:event_btnListarActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
