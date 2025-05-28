@@ -27,6 +27,8 @@ public class formulario extends javax.swing.JFrame {
         initComponents();
     }
     
+    double valor = 0;
+    
     private void Lista(){
         try{
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1/banco","root","");
@@ -287,7 +289,6 @@ public class formulario extends javax.swing.JFrame {
             inpProduto.setText("");
             inpQuantidade.setText("");
             inpVlUnitario.setText("");
-            inpSubTotal.setText("");
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -304,6 +305,12 @@ public class formulario extends javax.swing.JFrame {
         
             inpSubTotal.setText(resultado);
             
+            valor = valor + Double.parseDouble(inpSubTotal.getText());
+            
+            inpValorGeral.setText(String.valueOf(valor));
+            
+            System.out.println(valor);
+            
             try
             {
                com.mysql.jdbc.Connection con=(com.mysql.jdbc.Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/banco","root",""); 
@@ -311,9 +318,6 @@ public class formulario extends javax.swing.JFrame {
 
               String insert="INSERT INTO produto VALUES('"+inpNumero.getText()+"','"+inpProduto.getText()+"','"+inpQuantidade.getText()+"','"+inpVlUnitario.getText()+"');";
               stmt.executeUpdate(insert);
-
-
-
             }
             catch(Exception e)
             {
@@ -365,7 +369,36 @@ public class formulario extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
-        
+        if(jTable1.getSelectedRow()>=0){
+            try
+                {
+                    com.mysql.jdbc.Connection con=(com.mysql.jdbc.Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/banco","root",""); 
+                    Statement stmt=(Statement)con.createStatement();
+
+                    String update="UPDATE produto SET produto='"+inpProduto.getText()+"', quantidade ='"+inpQuantidade.getText()+"', valorunitario ='"+inpVlUnitario.getText()+"'  WHERE numero="+
+                    jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0)+";";  
+                    stmt.executeUpdate(update);
+                    JOptionPane.showMessageDialog(null, "Produto atulizado com sucesso");
+                    
+                    this.Lista();
+                    inpNumero.setText("");
+                    inpProduto.setText("");
+                    inpQuantidade.setText("");
+                    inpVlUnitario.setText("");
+            
+                    valor = valor + Double.parseDouble(inpSubTotal.getText());
+            
+                    inpValorGeral.setText(String.valueOf(valor));
+            
+                    System.out.println(valor);
+                }
+                catch(Exception e)
+                {
+                    JOptionPane.showMessageDialog(null, e.getMessage() ,"Error", 1);
+                }
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione uma liha" ,"Error", 1);
+        }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
