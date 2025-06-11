@@ -10,10 +10,10 @@ import javax.swing.table.DefaultTableModel;
 
 
 
-public class Consulta extends javax.swing.JFrame {
+public class ConsultaLogin extends javax.swing.JFrame {
 
   
-    public Consulta() {
+    public ConsultaLogin() {
         initComponents();
     }
 
@@ -24,7 +24,7 @@ public class Consulta extends javax.swing.JFrame {
         {
             Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/banco","root",""); 
             String sql;  
-            sql="select * from cadastro";
+            sql="select * from usuario";
             PreparedStatement banco = (PreparedStatement) con.prepareStatement(sql);
             banco.execute();
             ResultSet resultado = banco.executeQuery(sql);
@@ -35,10 +35,8 @@ public class Consulta extends javax.swing.JFrame {
                 model.addRow(new Object[] 
                 { 
       
-                    resultado.getString("codigo"),
-                    resultado.getString("nome"),
-                    resultado.getString("telefone"),
-                    resultado.getString("email")
+                    resultado.getString("login"),
+                    resultado.getString("senha"),
                    }); 
             } 
             banco.close();
@@ -82,9 +80,17 @@ public class Consulta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Nome", "Teefone", "E-mail"
+                "Login", "Senha"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         btnListar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -126,15 +132,15 @@ public class Consulta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnListar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnIncluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnExcluir)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSair))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnSair)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -143,13 +149,11 @@ public class Consulta extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnExcluir)
-                        .addComponent(btnSair))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnListar)
-                        .addComponent(btnIncluir)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnListar)
+                    .addComponent(btnIncluir)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnSair))
                 .addContainerGap())
         );
 
@@ -163,15 +167,15 @@ public class Consulta extends javax.swing.JFrame {
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
 
-        CadastroUsuario novoCadastro = new CadastroUsuario();
-        novoCadastro.setVisible(true);
+        CadastroLogin novoCadastroLogin = new CadastroLogin();
+        novoCadastroLogin.setVisible(true);
        
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         
         int response = JOptionPane.showConfirmDialog(null,
-            "Deseja Excluiir ?", "Confirmação",
+            "Deseja Excluir ?", "Confirmação",
             JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (response == JOptionPane.YES_OPTION) {  
@@ -183,8 +187,8 @@ public class Consulta extends javax.swing.JFrame {
                     Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/banco","root","");
                     Statement stmt=(Statement)con.createStatement();
 
-                    String delete="DELETE FROM cadastro WHERE codigo="+
-                    jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0)+";";
+                    String login = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString();
+                    String delete = "DELETE FROM usuario WHERE login = '" + login + "';";
                     stmt.executeUpdate(delete);
                 }
                 catch(Exception e)

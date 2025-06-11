@@ -29,7 +29,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" pref="652" max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" pref="352" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -52,15 +52,11 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblTelefone" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblSenha" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="inpTelefone" min="-2" pref="183" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                              <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="inpEmail" min="-2" pref="287" max="-2" attributes="0"/>
+                              <Component id="edtSenha" min="-2" pref="287" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="btnLimpar" min="-2" max="-2" attributes="0"/>
@@ -68,14 +64,10 @@
                               <Component id="btlSalvar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblCodigo" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="lblLogin" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="inpCodigoCliente" min="-2" pref="70" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblNome" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="inpNomeCliente" max="32767" attributes="0"/>
+                          <Component id="edtLogin" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
@@ -87,17 +79,13 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="inpNomeCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="inpCodigoCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblLogin" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="edtLogin" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="inpEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="inpTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblSenha" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="edtSenha" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -110,44 +98,31 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lblCodigo">
+        <Component class="javax.swing.JLabel" name="lblLogin">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="11" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Codigo"/>
+            <Property name="text" type="java.lang.String" value="Login"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblNome">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Nome"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="inpNomeCliente">
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblTelefone">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Telefone"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblEmail">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="E-mail"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="inpEmail">
+        <Component class="javax.swing.JTextField" name="edtLogin">
           <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="inpEmailFocusLost"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inpEmailActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edtLoginActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblSenha">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Senha"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="edtSenha">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="edtSenhaFocusLost"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edtSenhaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnLimpar">
@@ -171,10 +146,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btlSalvarActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="inpCodigoCliente">
-        </Component>
-        <Component class="javax.swing.JTextField" name="inpTelefone">
         </Component>
       </SubComponents>
     </Container>

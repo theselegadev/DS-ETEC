@@ -1,7 +1,6 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,12 +15,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Emerson
  */
-public class Login extends javax.swing.JFrame {
+public class CadastroLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form Cadastro
      */
-    public Login() {
+    public CadastroLogin() {
         initComponents();
     }
     
@@ -46,12 +45,18 @@ public class Login extends javax.swing.JFrame {
         lblSenha = new javax.swing.JLabel();
         edtSenha = new javax.swing.JTextField();
         btnLimpar = new javax.swing.JButton();
-        btlAcesso = new javax.swing.JButton();
+        btlSalvar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblLogin.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblLogin.setText("Login");
+
+        edtLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtLoginActionPerformed(evt);
+            }
+        });
 
         lblSenha.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblSenha.setText("Senha");
@@ -68,18 +73,18 @@ public class Login extends javax.swing.JFrame {
         });
 
         btnLimpar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnLimpar.setText("Cancelar");
+        btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparActionPerformed(evt);
             }
         });
 
-        btlAcesso.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btlAcesso.setText("Acesso");
-        btlAcesso.addActionListener(new java.awt.event.ActionListener() {
+        btlSalvar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btlSalvar.setText("Gravar");
+        btlSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btlAcessoActionPerformed(evt);
+                btlSalvarActionPerformed(evt);
             }
         });
 
@@ -90,19 +95,19 @@ public class Login extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblSenha)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(btnLimpar)
+                            .addGap(45, 45, 45)
+                            .addComponent(btlSalvar)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addComponent(btnLimpar)
-                        .addGap(45, 45, 45)
-                        .addComponent(btlAcesso))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblLogin)
-                            .addComponent(lblSenha))
+                        .addComponent(lblLogin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(edtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edtLogin))))
+                        .addComponent(edtLogin)))
                 .addGap(114, 114, 114))
         );
         jPanel1Layout.setVerticalGroup(
@@ -119,7 +124,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpar)
-                    .addComponent(btlAcesso))
+                    .addComponent(btlSalvar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -129,7 +134,7 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -142,45 +147,52 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btlAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btlAcessoActionPerformed
-        try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/banco", "root", "");
-            Statement stmt = con.createStatement();
-
-            String login = edtLogin.getText();
-            String senha = edtSenha.getText();
-
-            String sql = "SELECT * FROM usuario WHERE login = '" + login + "' AND senha = '" + senha + "';";
-            ResultSet rs = stmt.executeQuery(sql);
-
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
-                new Formulario().setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Login ou senha inválidos.");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", 1);
-        }
-    }//GEN-LAST:event_btlAcessoActionPerformed
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        int response = JOptionPane.showConfirmDialog(null,"Deseja Limpar os Dados ?", "Confirmação",
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-
-        if (response == JOptionPane.YES_OPTION) {
-            this.Limpa();
-        }
-    }//GEN-LAST:event_btnLimparActionPerformed
+    private void edtSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edtSenhaFocusLost
+        // TODO add your handling code here:
+        edtSenha.setText(edtSenha.getText().toLowerCase());
+    }//GEN-LAST:event_edtSenhaFocusLost
 
     private void edtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_edtSenhaActionPerformed
 
-    private void edtSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_edtSenhaFocusLost
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        int response = JOptionPane.showConfirmDialog(null,"Deseja Limpar os Dados ?", "Confirmação",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (response == JOptionPane.YES_OPTION) {         
+            this.Limpa();
+        }
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btlSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btlSalvarActionPerformed
+        int response = JOptionPane.showConfirmDialog(null,"Deseja Gravar os Dados ?", "Confirmação",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (response == JOptionPane.YES_OPTION) {   
+
+            try
+            {
+                Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/banco","root","");
+                Statement stmt=(Statement)con.createStatement();
+
+                String insert="INSERT INTO usuario (login,senha) VALUES('"+edtLogin.getText()+"','"+edtSenha.getText()+"');";
+                stmt.executeUpdate(insert);
+
+            }
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null, e.getMessage() ,"Error", 1);
+
+            }
+            dispose();
+        }    
+        
+    }//GEN-LAST:event_btlSalvarActionPerformed
+
+    private void edtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtLoginActionPerformed
         // TODO add your handling code here:
-        edtSenha.setText(edtSenha.getText().toLowerCase());
-    }//GEN-LAST:event_edtSenhaFocusLost
+    }//GEN-LAST:event_edtLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,14 +224,14 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new CadastroUsuario().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgSexo;
-    private javax.swing.JButton btlAcesso;
+    private javax.swing.JButton btlSalvar;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JTextField edtLogin;
     private javax.swing.JTextField edtSenha;
