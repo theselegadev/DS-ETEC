@@ -1,5 +1,12 @@
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,6 +27,35 @@ public class Consulta extends javax.swing.JFrame {
         initComponents();
     }
 
+    private void Lista() {
+        
+        try
+        {
+            Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/banco","root",""); 
+            String sql;  
+            sql="select * from cadastro";
+            PreparedStatement banco = (PreparedStatement) con.prepareStatement(sql);
+            banco.execute();
+            ResultSet resultado = banco.executeQuery(sql);
+            DefaultTableModel model =(DefaultTableModel) jTable1.getModel();
+            model.setNumRows(0);
+            while(resultado.next())
+            {
+                model.addRow(new Object[] 
+                { 
+      
+                    resultado.getString("ra"),
+                    resultado.getString("aluno"),
+                    resultado.getString("curso"),
+                    resultado.getString("modulo")
+                   }); 
+            } 
+            banco.close();
+            con.close();   
+        }catch (SQLException ex){
+            System.out.println("o erro foi " +ex);
+        } 
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -131,6 +167,7 @@ public class Consulta extends javax.swing.JFrame {
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         // TODO add your handling code here:
+        this.Lista();
     }//GEN-LAST:event_btnListarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -150,7 +187,21 @@ public class Consulta extends javax.swing.JFrame {
 
         if (response == JOptionPane.YES_OPTION) {         
             if(jTable1.getSelectedRow() >= 0){
-                
+                try
+                {
+                    Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/banco","root","");
+                    Statement stmt=(Statement)con.createStatement();
+
+                    String delete="DELETE FROM cadastro WHERE ra="+
+                    jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0)+";";
+                    stmt.executeUpdate(delete);
+                }
+                catch(Exception e)
+                {
+                    JOptionPane.showMessageDialog(null, e.getMessage() ,"Error", 1);
+                }
+
+                this.Lista();
             }else{
                 JOptionPane.showMessageDialog(null,"Selecione um registro");
             }

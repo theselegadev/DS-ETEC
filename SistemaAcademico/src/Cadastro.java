@@ -1,4 +1,7 @@
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /*
@@ -23,7 +26,7 @@ public class Cadastro extends javax.swing.JFrame {
     private void Limpa(){
         inpRA.setText("");
         inpAluno.setText("");
-        inpMateria.setText("");
+        inpCurso.setText("");
         CbxModulo.setSelectedIndex(0);
     }
 
@@ -42,7 +45,7 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         inpAluno = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        inpMateria = new javax.swing.JTextField();
+        inpCurso = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         CbxModulo = new javax.swing.JComboBox<>();
         btnIcluir = new javax.swing.JButton();
@@ -58,7 +61,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         jLabel2.setText("Aluno");
 
-        jLabel3.setText("Matéria");
+        jLabel3.setText("Curso");
 
         jLabel4.setText("Módulo");
 
@@ -96,6 +99,11 @@ public class Cadastro extends javax.swing.JFrame {
         });
 
         btnGravar.setText("Gravar");
+        btnGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGravarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,7 +131,7 @@ public class Cadastro extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(inpMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(inpCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(114, 114, 114)
                                 .addComponent(jLabel4)
                                 .addGap(55, 55, 55)
@@ -153,7 +161,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(inpMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inpCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(CbxModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
@@ -219,6 +227,31 @@ public class Cadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
+        // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(null,"Deseja Gravar os Dados ?", "Confirmação",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (response == JOptionPane.YES_OPTION) {   
+
+            try
+            {
+                Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://127.0.0.1/banco","root","");
+                Statement stmt=(Statement)con.createStatement();
+
+                String insert="INSERT INTO cadastro VALUES('"+inpRA.getText()+"','"+inpAluno.getText()+"','"+inpCurso.getText()+"','"+CbxModulo.getSelectedItem()+"');";
+                stmt.executeUpdate(insert);
+
+            }
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null, e.getMessage() ,"Error", 1);
+
+            }
+            dispose();
+        }
+    }//GEN-LAST:event_btnGravarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -261,7 +294,7 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JButton btnGravar;
     private javax.swing.JButton btnIcluir;
     private javax.swing.JTextField inpAluno;
-    private javax.swing.JTextField inpMateria;
+    private javax.swing.JTextField inpCurso;
     private javax.swing.JTextField inpRA;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
